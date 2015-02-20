@@ -31,4 +31,19 @@ RUN wget -q http://www.cpan.org/src/5.0/perl-5.20.2.tar.gz                \
  && cd /                                                                  \
  && rm -r perl-5.20.2*
 
-COPY carton /usr/local/bin/carton
+RUN export PERL5LIB=/carton/lib/perl5                          \
+ && export PERL_MB_OPT=--install_base\ /carton                 \
+ && export PERL_MM_OPT=INSTALL_BASE=/carton                    \
+ && apt-get update                                             \
+ && apt-get -y --no-install-recommends install ca-certificates \
+ && rm -fr /var/lib/apt/lists/*                                \
+ && wget -qO- http://cpanmin.us | perl - -l carton Carton      \
+ && apt-get -y purge ca-certificates                           \
+ && apt-get -y --purge autoremove                              \
+ && cd carton                                                  \
+ && touch cpanfile                                             \
+ && bin/carton install                                         \
+ && bin/carton bundle                                          \
+ && mv vendor/bin/carton /usr/local/bin                        \
+ && cd /                                                       \
+ && rm -r carton
