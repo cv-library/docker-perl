@@ -18,9 +18,8 @@ RUN apt-get update                                                              
     -Duseshrplib                                                                \
  && make -j`nproc`                                                              \
  && make install                                                                \
- && rm -r /usr/local/lib/perl5/5.22.0/pod                                       \
  && cd /                                                                        \
- && rm -r perl-5.22.0*                                                          \
+ && rm -r perl-5.22.0* usr/local/lib/perl5/5.22.0/pod                           \
  && apt-get -y purge gcc libc6-dev make wget                                    \
  && apt-get -y --purge autoremove
 
