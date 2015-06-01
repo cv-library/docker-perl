@@ -20,7 +20,7 @@ RUN apt-get update                                                              
  && make install                                                                \
  && cd /                                                                        \
  && rm -r perl-5.22.0* usr/local/lib/perl5/5.22.0/pod                           \
- && apt-get -y purge gcc libc6-dev make wget                                    \
+ && apt-get -y purge gcc libc6-dev make wget xz-utils                           \
  && apt-get -y --purge autoremove
 
 # cpanm
