@@ -13,9 +13,8 @@ RUN apt-get update                                                              
  && tar xJf perl-5.26.0.tar.xz                                                  \
  && cd perl-5.26.0                                                              \
  && ./Configure                                                                 \
-    -Accflags="-DNO_MATHOMS -DPERL_DISABLE_PMC"                                 \
+    -Accflags="-DNO_MATHOMS -DPERL_DISABLE_PMC -DSILENT_NO_TAINT_SUPPORT"       \
     -des                                                                        \
-    -Duseshrplib                                                                \
  && make -j`nproc`                                                              \
  && make install                                                                \
  && cd /                                                                        \
