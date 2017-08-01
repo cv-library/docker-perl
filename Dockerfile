@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -15,6 +15,7 @@ RUN apt-get update                                                              
  && ./Configure                                                                 \
     -Accflags="-DNO_MATHOMS -DPERL_DISABLE_PMC -DSILENT_NO_TAINT_SUPPORT"       \
     -des                                                                        \
+    -Duseshrplib                                                                \
  && make -j`nproc`                                                              \
  && make install                                                                \
  && cd /                                                                        \
