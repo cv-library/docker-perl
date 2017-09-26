@@ -7,11 +7,11 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update                                                              \
  && apt-get -y --no-install-recommends install gcc libc6-dev make wget xz-utils \
  && rm -fr /var/lib/apt/lists/*                                                 \
- && wget -q http://www.cpan.org/src/5.0/perl-5.26.0.tar.xz                      \
- && echo 9bf2e3d0d72aad77865c3bdbc20d3b576d769c5c255c4ceb30fdb9335266bf55       \
-    perl-5.26.0.tar.xz | sha256sum -c --quiet                                   \
- && tar xJf perl-5.26.0.tar.xz                                                  \
- && cd perl-5.26.0                                                              \
+ && wget -q http://www.cpan.org/src/5.0/perl-5.26.1.tar.xz                      \
+ && echo fe8208133e73e47afc3251c08d2c21c5a60160165a8ab8b669c43a420e4ec680       \
+    perl-5.26.1.tar.xz | sha256sum -c --quiet                                   \
+ && tar xJf perl-5.26.1.tar.xz                                                  \
+ && cd perl-5.26.1                                                              \
  && ./Configure                                                                 \
     -Accflags="-DNO_MATHOMS -DPERL_DISABLE_PMC -DSILENT_NO_TAINT_SUPPORT"       \
     -des                                                                        \
@@ -19,7 +19,7 @@ RUN apt-get update                                                              
  && make -j`nproc`                                                              \
  && make install                                                                \
  && cd /                                                                        \
- && rm -r perl-5.26.0* usr/local/lib/perl5/5.26.0/pod                           \
+ && rm -r perl-5.26.1* usr/local/lib/perl5/5.26.1/pod                           \
  && apt-get -y purge gcc libc6-dev make wget xz-utils                           \
  && apt-get -y --purge autoremove
 
