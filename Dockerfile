@@ -23,13 +23,4 @@ RUN apt-get update                                                              
  && apt-get -y purge gcc libc6-dev make wget xz-utils                           \
  && apt-get -y --purge autoremove
 
-# cpanm
-RUN apt-get update                                                       \
- && apt-get -y --no-install-recommends install ca-certificates make wget \
- && rm -fr /var/lib/apt/lists/*                                          \
- && wget -qO-                                                            \
-    https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm |  \
-    perl - --skip-satisfied App::cpanminus                               \
- && rm -r ~/.cpanm                                                       \
- && apt-get -y purge ca-certificates make wget                           \
- && apt-get -y --purge autoremove
+COPY cpm /usr/local/bin/
